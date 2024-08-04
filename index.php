@@ -155,8 +155,9 @@ $queryToko = $config->query("SELECT * FROM toko")->fetch(PDO::FETCH_ASSOC);
 <body>
     <div class="container">
         <div class="title-section">
-            <img src="gambar/WhatsApp Image 2024-08-02 at 13.59.02.jpeg" alt="Logo Sumber Aneka Botol" width="120px" height="100px" >
-        
+            <img src="assets/gambar/logo_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="120px" height="100px" >
+            <img src="assets/gambar/title_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="200px" height="50px" >
+
             <!-- <a href="#nav" class="meanmenu-reveal" style="right: 0px; left: auto; text-align: center; text-indent: 0px; font-size: 18px;"><span></span><span></span><span></span></a> -->
         </div>
         
