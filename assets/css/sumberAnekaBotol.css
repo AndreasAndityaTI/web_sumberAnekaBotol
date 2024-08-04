@@ -1,0 +1,133 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    background-color: #28A0DA; /* Background color to match the container */
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+}
+
+.title-section {
+    border: 1px solid #ddd;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: left;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    width: 50%;
+    /* max-width: 230px; */
+    height: 50%;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    flex-grow: 1;
+    flex-basis: calc(25% - 20px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+
+    background-color: #ffffff;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+}
+.product-card img {
+    border-radius: 50px;
+
+    width: 200px;
+    height: 200px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    align-self: center;
+}
+.product-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #34495e;
+}
+.product-card p {
+    margin: 5px 0;
+    color: #555;
+}
+.product-card .price {
+    color: #e74c3c;
+    font-size: 16px;
+    margin: 10px 0;
+}
+.product-card .btn-chat {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.product-card .btn-chat:hover {
+    background-color: #2980b9;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-width: 200px;
+    height: 200px;
+}
+@media (max-width: 768px) {
+    .product-card {
+        flex-basis: calc(50% - 20px);
+    }
+}
+@media (max-width: 480px) {
+    .product-card {
+        flex-basis: 100%;
+    }
+}
+
+/* Style for the floating WhatsApp button */
+.wa-button {
+    position: fixed;
+    bottom: 20px; /* Adjusted to prevent any overlap with the white line */
+    right: 20px;
+    /* z-index: 2147483647; */
+    width: 100px; /* Set a specific width for the button */
+    height: 100px; /* Set a specific height for the button */
+    background-color: #25D366; /* WhatsApp green */
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Optional: add shadow for better visibility */
+    text-decoration: none; /* Ensure no underline on the button */
+    border-radius: 50%;
+
+}
+
+.wa-button:hover {
+    background-color: #128C7E; /* Darker WhatsApp green on hover */
+}
+
+.wa-button img {
+    width: 70%; /* Make sure the image fits well inside the button */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
