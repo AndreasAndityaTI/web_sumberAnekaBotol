@@ -136,7 +136,10 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
         <div class="product-grid row">
     <?php foreach ($products as $product): ?>
         <div class="product-card col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-            <img src="get_image.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" class="center img-fluid">
+            <center>
+            <img src="get_image.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" >
+    </center>
+
             <div class="product-info">
                 <h3><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></h3>
                 <p class="merk"><?php echo htmlspecialchars($product['merk'], ENT_QUOTES, 'UTF-8'); ?></p>
@@ -188,11 +191,9 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                         <h6 class="text-uppercase fw-bold mb-4">Kontak</h6>
                         <?php foreach ($kontaks as $kontak):?>
                         <p class="fas fa-home me-3" >
-                            <center>
                         <a href=" <?php echo htmlspecialchars($kontak['isi'], ENT_QUOTES, 'UTF-8'); ?>" class="text-reset">
                         <?php echo htmlspecialchars($kontak['info'], ENT_QUOTES, 'UTF-8'); ?>
                         </a>
-                        </center>
 
                         </p>
                         <?php endforeach; ?>
