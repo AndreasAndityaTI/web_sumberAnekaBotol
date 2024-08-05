@@ -133,24 +133,24 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <div class="container-fluid mt-3">
-            <div class="product-grid row">
-                <?php foreach ($products as $product): 
-                    $message = urlencode("Halo, saya tertarik untuk membeli produk berikut:\n\nNama Barang: " . htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8') . "\nMerk: " . htmlspecialchars($product['merk'], ENT_QUOTES, 'UTF-8') . "\nHarga: Rp " . htmlspecialchars($product['harga_jual'], ENT_QUOTES, 'UTF-8') . "\nSatuan: " . htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'));
-                ?>
-                    <div class="product-card col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <img src="get_image.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" class="center img-fluid">
-                        <div class="product-info">
-                            <h3><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                            <p class="merk"><?php echo htmlspecialchars($product['merk'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            <p class="price">Rp <?php echo htmlspecialchars($product['harga_jual'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            <p class="satuan"><?php echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            <a href="https://wa.me/6285158242422?text=<?php echo $message; ?>" class="btn-chat">CHAT</a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+        <div class="product-grid row">
+    <?php foreach ($products as $product): ?>
+        <div class="product-card col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <img src="get_image.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" class="center img-fluid">
+            <div class="product-info">
+                <h3><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                <p class="merk"><?php echo htmlspecialchars($product['merk'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p class="price">Rp <?php echo htmlspecialchars($product['harga_jual'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p class="satuan"><?php echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <a href="product_detail.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-primary">View Details</a>
             </div>
         </div>
-        
+    <?php endforeach; ?>
+</div>
+        </div>
+        <a href="https://wa.me/6281802134040" class="wa-button">
+            <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
+        </a>
         <!-- Footer -->
         <footer class="text-center text-lg-start bg-body-tertiary text-muted">
             <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
