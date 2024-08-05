@@ -58,7 +58,7 @@ $queryToko = $config->query("SELECT * FROM toko")->fetch(PDO::FETCH_ASSOC);
                     <img src="assets/gambar/dropdown.png" alt="dropdown" width="30px">
                 </button>
                 <img src="assets/gambar/logo_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="50px">
-                <img src="assets/gambar/title_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="200px" class="ms-3">
+                <img src="assets/gambar/title_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="185px" class="ms-3">
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li><a class="dropdown-item" href="#about">About</a></li>
                     <li><a class="dropdown-item" href="#base">Base</a></li>
@@ -181,7 +181,8 @@ $queryToko = $config->query("SELECT * FROM toko")->fetch(PDO::FETCH_ASSOC);
                         </div>
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                             <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                            <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                            <p class="fas fa-home me-3">Jl. Gondosuli No.1, Baciro, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55165</p>
+
                             <p><i class="fas fa-envelope me-3"></i> info@example.com</p>
                             <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
                             <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
@@ -190,8 +191,8 @@ $queryToko = $config->query("SELECT * FROM toko")->fetch(PDO::FETCH_ASSOC);
                 </div>
             </section>
             <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-                © 2021 Copyright:
-                <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                © 2024 Copyright:
+                <a  >Sumber Aneka Botol</a>
             </div>
         </footer>
     </div>
