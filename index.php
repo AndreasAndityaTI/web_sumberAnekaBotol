@@ -2,7 +2,7 @@
 include 'config.php';
 
 // Fetch products
-$query = $config->query("SELECT id, merk, harga_jual, satuan_barang, stok, nama_barang FROM barang");
+$query = $config->query("SELECT id, harga_jual, satuan_barang, stok, nama_barang FROM barang");
 $products = $query->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch alamat details
@@ -106,6 +106,16 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
+
+
+
+
+
+
+
+
+
+
         <!-- Carousel -->
         <div id="demo" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -142,10 +152,23 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="product-info">
                 <h3><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                <p class="merk"><?php echo htmlspecialchars($product['merk'], ENT_QUOTES, 'UTF-8'); ?></p>
-                <p class="price">Rp <?php echo htmlspecialchars($product['harga_jual'], ENT_QUOTES, 'UTF-8'); ?></p>
-                <p class="satuan"><?php echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); ?></p>
-                <a href="product_detail.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-primary">View Details</a>
+                <!-- <p class="merk"> -->
+                    <?php 
+                    // echo htmlspecialchars($product['merk'], ENT_QUOTES, 'UTF-8'); 
+                    ?>
+                    <!-- </p> -->
+                <!-- <p class="price">Rp  -->
+                    <?php 
+                    // echo htmlspecialchars($product['harga_jual'], ENT_QUOTES, 'UTF-8'); 
+                    ?>
+                <!-- </p> -->
+                <!-- <p class="satuan"> -->
+                    <?php 
+                    // echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); 
+                    ?>
+                <!-- </p> -->
+                 <br>
+                <a href="product_detail.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline-secondary">Selengkapnya</a>
             </div>
         </div>
     <?php endforeach; ?>

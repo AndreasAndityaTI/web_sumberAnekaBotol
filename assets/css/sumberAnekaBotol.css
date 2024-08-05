@@ -37,7 +37,7 @@ body, html {
 }
 .product-card {
     border: 1px solid #ddd;
-    border-radius: 50px;
+    border-radius: 10px;
     width: 50%;
     /* max-width: 230px; */
     height: 50%;
@@ -56,10 +56,10 @@ body, html {
     gap: 10px;
 }
 .product-card img {
-    border-radius: 50px;
+    border-radius: 10px;
 
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 15px;
     align-self: center;

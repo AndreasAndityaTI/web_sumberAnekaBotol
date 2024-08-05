@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 include 'config.php';
 
 // Fetch products
-$query = $config->query("SELECT id, merk, harga_jual, satuan_barang, stok, nama_barang FROM barang");
+$query = $config->query("SELECT *FROM barang");
 $products = $query->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch alamat details
@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
     }
     
     try {
-        $query = $config->prepare("SELECT id, merk, harga_jual, satuan_barang, stok, nama_barang, deskripsi FROM barang WHERE id = ?");
+        $query = $config->prepare("SELECT * FROM barang WHERE id = ?");
         $query->execute([$product_id]);
         $product = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -88,6 +88,20 @@ if (isset($_GET['id'])) {
           background-color: rgba(255,255,255,0.6);
           margin-left: -55%; /* Adjust this value to set the desired left margin */
         }
+
+
+        .product-info {
+    display: flex;
+    align-items: center;
+}
+
+.product-info img {
+    margin-right: 20px;
+}
+
+.product-info .description {
+    max-width: 600px;
+}
     </style>
 </head>
 <body>
@@ -142,22 +156,42 @@ if (isset($_GET['id'])) {
 
 
 
+        <nav aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+      <li class="breadcrumb-item">
+        <a class="link-body-emphasis fw-semibold text-decoration-none" href="index.php">
+          <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+          Home
+        </a>
+      </li>
+
+      <li class="breadcrumb-item active" aria-current="page">
+        Detail Produk
+      </li>
+    </ol>
+  </nav>
 
 
+
+
+
+
+
+        <div class="product-info">
+    <img src="get_image.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" 
+         alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" 
+         class="img-fluid" 
+         style="width: 200px; height: 150px;">
+    <div class="description">
         <h1><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></h1>
-<img src="get_image.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" 
-     alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" 
-     class="img-fluid"
-     style="width: 200px; height: 150px;">        
-        
-        
-        
-        <p><strong>Merk:</strong> <?php echo htmlspecialchars($product['merk'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Harga:</strong> Rp <?php echo htmlspecialchars($product['harga_jual'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Satuan:</strong> <?php echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Stok:</strong> <?php echo htmlspecialchars($product['stok'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Deskripsi:</strong> <?php echo htmlspecialchars($product['deskripsi'], ENT_QUOTES, 'UTF-8'); ?></p>
-        <a href="index.php" class="btn btn-secondary">Back to Products</a>
+    </div>
+</div>
+
+
         <footer class="text-center text-lg-start bg-body-tertiary text-muted">
             <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
                 <div class="me-5 d-none d-lg-block">
