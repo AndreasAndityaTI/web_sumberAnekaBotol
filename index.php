@@ -5,8 +5,16 @@ include 'config.php';
 $query = $config->query("SELECT id, merk, harga_jual, satuan_barang, stok, nama_barang FROM barang");
 $products = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch store details
-$queryToko = $config->query("SELECT * FROM toko")->fetch(PDO::FETCH_ASSOC);
+// Fetch alamat details
+
+$query_alamat = $config->query("SELECT id, isi FROM alamat");
+$alamats = $query_alamat->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch kontak details
+
+$query_kontak = $config->query("SELECT id, isi,info FROM kontak");
+$kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +79,7 @@ $queryToko = $config->query("SELECT * FROM toko")->fetch(PDO::FETCH_ASSOC);
             </div>
             <div class="col-md-4 d-none d-md-block text-end">
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">
+                    <button onclick="tampil_isiDropdown()" class="dropbtn">
                         <img src="assets/gambar/dropdown.png" alt="dropdown" width="30px">
                         <a>Kategori</a>
                     </button>
@@ -161,32 +169,37 @@ $queryToko = $config->query("SELECT * FROM toko")->fetch(PDO::FETCH_ASSOC);
             <section class="">
                 <div class="container text-center text-md-start mt-5">
                     <div class="row mt-3">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-3"></i>Company name</h6>
-                            <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">Products</h6>
-                            <p><a href="#!" class="text-reset">Angular</a></p>
-                            <p><a href="#!" class="text-reset">React</a></p>
-                            <p><a href="#!" class="text-reset">Vue</a></p>
-                            <p><a href="#!" class="text-reset">Laravel</a></p>
-                        </div>
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
-                            <p><a href="#!" class="text-reset">Pricing</a></p>
-                            <p><a href="#!" class="text-reset">Settings</a></p>
-                            <p><a href="#!" class="text-reset">Orders</a></p>
-                            <p><a href="#!" class="text-reset">Help</a></p>
-                        </div>
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                            <p class="fas fa-home me-3">Jl. Gondosuli No.1, Baciro, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55165</p>
 
-                            <p><i class="fas fa-envelope me-3"></i> info@example.com</p>
-                            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-                        </div>
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        
+                
+                        <h6 class="text-uppercase fw-bold mb-4">Alamat</h6>
+                        <?php foreach ($alamats as $alamat):?>
+                        <p class="fas fa-home me-3">
+                        <?php echo htmlspecialchars($alamat['isi'], ENT_QUOTES, 'UTF-8'); ?>
+                        </p>
+                        <?php endforeach; ?>
+
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        
+                
+                        <h6 class="text-uppercase fw-bold mb-4">Kontak</h6>
+                        <?php foreach ($kontaks as $kontak):?>
+                        <p class="fas fa-home me-3" >
+                            <center>
+                        <a href=" <?php echo htmlspecialchars($kontak['isi'], ENT_QUOTES, 'UTF-8'); ?>" class="text-reset">
+                        <?php echo htmlspecialchars($kontak['info'], ENT_QUOTES, 'UTF-8'); ?>
+                        </a>
+                        </center>
+
+                        </p>
+                        <?php endforeach; ?>
+
+                    </div>
+   
+
                     </div>
                 </div>
             </section>
