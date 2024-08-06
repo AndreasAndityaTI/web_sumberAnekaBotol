@@ -2,7 +2,7 @@
 include 'config.php';
 
 // Fetch products
-$query = $config->query("SELECT id, harga_jual, satuan_barang, stok, nama_barang FROM barang");
+$query = $config->query("SELECT id,  satuan_barang, stok, nama_barang FROM barang");
 $products = $query->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch alamat details

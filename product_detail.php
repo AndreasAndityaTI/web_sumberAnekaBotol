@@ -5,19 +5,15 @@ error_reporting(E_ALL);
 
 include 'config.php';
 
-// Fetch products
-$query = $config->query("SELECT *FROM barang");
-$products = $query->fetchAll(PDO::FETCH_ASSOC);
-
 // Fetch alamat details
-
 $query_alamat = $config->query("SELECT id, isi FROM alamat");
 $alamats = $query_alamat->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch kontak details
-
-$query_kontak = $config->query("SELECT id, isi,info FROM kontak");
+$query_kontak = $config->query("SELECT id, isi, info FROM kontak");
 $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch product details
 if (isset($_GET['id'])) {
     $product_id = intval($_GET['id']);
     
@@ -35,20 +31,30 @@ if (isset($_GET['id'])) {
         if (!$product) {
             die('Product not found!');
         }
+
+        // Fetch product sizes
+        $sizes = explode(',', $product['ukuran']);
     } catch (PDOException $e) {
         die('Query failed: ' . $e->getMessage());
     }
 } else {
     die('Product ID is not specified!');
 }
+
+
+// Ambil data JSON dari database
+$query_json = $config->prepare("SELECT ukuran_dan_harga FROM barang WHERE id = :id");
+$query_json->bindParam(':id', $product_id, PDO::PARAM_INT);
+$query_json->execute();
+$result = $query_json->fetch(PDO::FETCH_ASSOC);
+
+
+// Decode JSON menjadi array PHP
+$ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,15 +64,13 @@ if (isset($_GET['id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/sumberAnekaBotol.css">
     <link rel="stylesheet" type="text/css" href="assets/css/dropdown.css">
-
     <script src="assets/js/dropdown.js"></script>
-
     <style>
         .title-section {
             padding: 10px 0;
         }
         .title-section img {
-          max-width: 100%;
+            max-width: 100%;
             height: auto;
         }
         .title-section .input-group {
@@ -82,34 +86,63 @@ if (isset($_GET['id'])) {
             display: none;
         }
         .hamburger-menu {
-          border: 0px solid transparent;
-
-
-          background-color: rgba(255,255,255,0.6);
-          margin-left: -55%; /* Adjust this value to set the desired left margin */
+            border: 0px solid transparent;
+            background-color: rgba(255, 255, 255, 0.6);
+            margin-left: -55%;
         }
-
-
-        .product-info {
+/* CSS umum */
+.product-info {
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
+}
+
+/* CSS umum */
+.product-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .product-info img {
     margin-right: 20px;
+    width: 200px; /* Atur sesuai kebutuhan */
+    height: auto; /* Menjaga rasio aspek gambar */
+    border-radius: 10px;
+
 }
 
 .product-info .description {
     max-width: 600px;
 }
+
+/* CSS khusus untuk mobile */
+@media (max-width: 768px) {
+    .product-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-info img {
+        margin-right: 0;
+        margin-bottom: 15px;
+
+        width: 100%; /* Membuat gambar memenuhi lebar layar */
+        height: auto; /* Menjaga rasio aspek gambar */
+    }
+
+    .product-info .description {
+        max-width: 100%; /* Menyesuaikan lebar deskripsi dengan lebar layar */
+    }
+}
+
+
     </style>
 </head>
 <body>
     <div class="container">
-        
-    
-    <div class="title-section row align-items-center justify-content-between" >
-            <div class="col-8 col-md-4 d-flex align-items-center" >
+        <div class="title-section row align-items-center justify-content-between">
+            <div class="col-8 col-md-4 d-flex align-items-center">
                 <button class="btn btn-secondary d-md-none me-3 hamburger-menu" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="assets/gambar/dropdown.png" alt="dropdown" width="30px">
                 </button>
@@ -154,42 +187,54 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 
-
-
         <nav aria-label="breadcrumb">
-    <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
-      <li class="breadcrumb-item">
-        <a class="link-body-emphasis fw-semibold text-decoration-none" href="index.php">
-          <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
-          Home
-        </a>
-      </li>
-
-      <li class="breadcrumb-item active" aria-current="page">
-        Detail Produk
-      </li>
-    </ol>
-  </nav>
-
-
-
+            <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+                <li class="breadcrumb-item">
+                    <a class="link-body-emphasis fw-semibold text-decoration-none" href="index.php">
+                        <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Detail Produk</li>
+            </ol>
+        </nav>
 
 
 
 
         <div class="product-info">
     <img src="get_image.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" 
-         alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" 
-         class="img-fluid" 
-         style="width: 200px; height: 150px;">
+        alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" 
+        class="img-fluid">
     <div class="description">
         <h1><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></h1>
-        <p><strong>Harga:</strong> Rp <?php echo htmlspecialchars($product['harga_jual'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Satuan:</strong> <?php echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Stok:</strong> <?php echo htmlspecialchars($product['stok'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Deskripsi:</strong> <?php echo htmlspecialchars($product['deskripsi'], ENT_QUOTES, 'UTF-8'); ?></p>
+        <p><strong>Ukuran Tersedia dan Harga:</strong></p>
+        <?php
+        function formatRupiah($angka) {
+            $format = number_format($angka, 2, ',', '.');
+            return 'Rp. ' . $format;
+        }
+        
+        ?>
+<ul>
+    <?php foreach ($ukuran_dan_harga as $size => $price): ?>
+        <li>
+            <?php echo htmlspecialchars($size, ENT_QUOTES, 'UTF-8'); ?> - 
+            <?php echo formatRupiah($price); ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
     </div>
 </div>
+
+
+
+
+
 
 
         <footer class="text-center text-lg-start bg-body-tertiary text-muted">
@@ -209,50 +254,37 @@ if (isset($_GET['id'])) {
             <section class="">
                 <div class="container text-center text-md-start mt-5">
                     <div class="row mt-3">
-
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        
-                
-                        <h6 class="text-uppercase fw-bold mb-4">Alamat</h6>
-                        <?php foreach ($alamats as $alamat):?>
-                        <p class="fas fa-home me-3">
-                            
-                        <?php echo htmlspecialchars($alamat['isi'], ENT_QUOTES, 'UTF-8'); ?>
-                        </p>
-                        <?php endforeach; ?>
-
-                    </div>
-
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        
-                
-                        <h6 class="text-uppercase fw-bold mb-4">Kontak</h6>
-                        <?php foreach ($kontaks as $kontak):?>
-                        <p class="fas fa-home me-3" >
-                            <center>
-                        <a href=" <?php echo htmlspecialchars($kontak['isi'], ENT_QUOTES, 'UTF-8'); ?>" class="text-reset">
-                        <?php echo htmlspecialchars($kontak['info'], ENT_QUOTES, 'UTF-8'); ?>
-                        </a>
-                        </center>
-
-                        </p>
-                        <?php endforeach; ?>
-
-                    </div>
-   
-
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">Alamat</h6>
+                            <?php foreach ($alamats as $alamat): ?>
+                                <p class="fas fa-home me-3">
+                                    <?php echo htmlspecialchars($alamat['isi'], ENT_QUOTES, 'UTF-8'); ?>
+                                </p>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">Kontak</h6>
+                            <?php foreach ($kontaks as $kontak): ?>
+                                <p class="fas fa-home me-3">
+                                    <center>
+                                        <a href="<?php echo htmlspecialchars($kontak['isi'], ENT_QUOTES, 'UTF-8'); ?>" class="text-reset">
+                                            <?php echo htmlspecialchars($kontak['info'], ENT_QUOTES, 'UTF-8'); ?>
+                                        </a>
+                                    </center>
+                                </p>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </section>
             <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
                 © 2024 Copyright:
-                <a  >Sumber Aneka Botol</a>
+                <a>Sumber Aneka Botol</a>
             </div>
         </footer>
     </div>
     <a href="https://wa.me/6281802134040" class="wa-button">
-            <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
-        </a>
-       
+        <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
+    </a>
 </body>
 </html>
