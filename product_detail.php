@@ -124,10 +124,12 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     }
 
     .product-info img {
-        margin-right: 0;
-        margin-bottom: 15px;
-
-        width: 100%; /* Membuat gambar memenuhi lebar layar */
+        display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 80%;
         height: auto; /* Menjaga rasio aspek gambar */
     }
 
@@ -208,8 +210,8 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
         class="img-fluid">
     <div class="description">
         <h1><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></h1>
+        <br>
         <p><strong>Satuan:</strong> <?php echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); ?></p>
-        <p><strong>Stok:</strong> <?php echo htmlspecialchars($product['stok'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Deskripsi:</strong> <?php echo htmlspecialchars($product['deskripsi'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Ukuran Tersedia dan Harga:</strong></p>
         <?php

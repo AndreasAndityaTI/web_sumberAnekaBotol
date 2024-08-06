@@ -2,7 +2,7 @@
 include 'config.php';
 
 // Fetch products
-$query = $config->query("SELECT id,  satuan_barang, stok, nama_barang FROM barang");
+$query = $config->query("SELECT id,  satuan_barang, nama_barang FROM barang");
 $products = $query->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch alamat details
@@ -56,6 +56,17 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
           background-color: rgba(255,255,255,0.6);
           margin-left: -55%; /* Adjust this value to set the desired left margin */
         }
+
+
+        .cart-icon-red {
+    filter: hue-rotate(0deg) saturate(4) brightness(0.7);
+    /* Additional properties for better visibility */
+    filter: sepia(1) saturate(5) hue-rotate(-50deg);
+}
+        
+
+
+
     </style>
 </head>
 <body>
@@ -67,6 +78,7 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                 </button>
                 <img src="assets/gambar/logo_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="50px">
                 <img src="assets/gambar/title_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="185px" class="ms-3">
+
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li><a class="dropdown-item" href="#about">About</a></li>
                     <li><a class="dropdown-item" href="#base">Base</a></li>
@@ -77,9 +89,26 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                     <li><a class="dropdown-item" href="#tools">Tools</a></li>
                 </ul>
             </div>
+
             <div class="col-md-4 d-none d-md-block text-end">
                 <div class="dropdown">
-                    <button onclick="tampil_isiDropdown()" class="dropbtn">
+                <span class="col-12 col-md-4 text-end">
+    <!-- Cart Icon -->
+<!-- Cart Icon -->
+<a href="cart.php" class="btn btn-light position-relative">
+    <img src="assets/gambar/cart_icon.png" alt="Cart" class="cart-icon cart-icon-red" width="100px">
+    <?php if (!empty($_SESSION['cart'])): ?>
+        <?php $cart_count = array_sum($_SESSION['cart']); ?>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <?php echo htmlspecialchars($cart_count, ENT_QUOTES, 'UTF-8'); ?>
+            <span class="visually-hidden">items in cart</span>
+        </span>
+    <?php endif; ?>
+</a>
+
+        </span>
+          
+                    <button onclick="tampil_isiDropdown()" class="dropbtn" width="30px">
                         <img src="assets/gambar/dropdown.png" alt="dropdown" width="30px">
                         <a>Kategori</a>
                     </button>
@@ -104,6 +133,12 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                     </button>
                 </div>
             </div>
+
+
+
+
+
+
         </div>
 
 
@@ -162,11 +197,11 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                     // echo htmlspecialchars($product['harga_jual'], ENT_QUOTES, 'UTF-8'); 
                     ?>
                 <!-- </p> -->
-                <!-- <p class="satuan"> -->
+                <p class="satuan">
                     <?php 
-                    // echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); 
+                    echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); 
                     ?>
-                <!-- </p> -->
+                </p>
                  <br>
                 <a href="product_detail.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline-secondary">Selengkapnya</a>
             </div>
@@ -174,6 +209,7 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
     <?php endforeach; ?>
 </div>
         </div>
+        
         <a href="https://wa.me/6281802134040" class="wa-button">
             <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
         </a>
