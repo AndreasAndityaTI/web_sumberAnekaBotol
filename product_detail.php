@@ -116,8 +116,53 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     max-width: 600px;
 }
 
+/* CSS khusus untuk mobile */
+@media (max-width: 800px) {
+    .product-info {
+        flex-direction: column;
+        align-items: flex-start;
+        
+    }
+
+    .product-info img {
+        display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 80%;
+        height: auto; /* Menjaga rasio aspek gambar */
+    }
+
+    .product-info .description {
+        max-width: 100%; /* Menyesuaikan lebar deskripsi dengan lebar layar */
+        margin-left: 10%;
+  margin-right: auto;
+
+    }
+    #cart-icon {
+    position: fixed;
+    bottom: 20px; /* Adjust to fit within screen */
+    right: 20px; /* Adjust to fit within screen */
+    width: 60px; /* Adjust width as needed */
+    height: 60px; /* Adjust height as needed */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    border-radius: 50%;
+    z-index: 1000; /* Ensure it's on top of other elements */
+    visibility: visible; /* Ensure visibility */
+}
+
+#cart-icon:hover {
+    background-color: gray; /* Darker color on hover */
+}
+
 /* Style for the floating Cart button */
-@media only screen and (max-width: 768px) {
+@media only screen {
 
 .cart-button {
     position: fixed;
@@ -126,8 +171,8 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     max-width: 768px;
 
     /* z-index: 2147483647; */
-    width: 100px; /* Set a specific width for the button */
-    height: 100px; /* Set a specific height for the button */
+    width: 80px; /* Set a specific width for the button */
+    height: 80px; /* Set a specific height for the button */
     background-color: white; /* WhatsApp green */
     display: flex;
     align-items: center; /* Center items vertically */
@@ -152,6 +197,12 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
 }
 
 
+}
+@media (min-width: 768px) {
+        .cart-button {
+            display: none;
+        }
+    }
 
     </style>
 </head>
@@ -181,8 +232,8 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
                 <span class="col-12 col-md-4 text-end">
     <!-- Cart Icon -->
 <!-- Cart Icon -->
-<a href="cart.php" class="btn btn-light position-relative">
-    <img src="assets/gambar/cart_icon.png" alt="Cart" class="cart-icon cart-icon-red" width="100px">
+<a href="cart.php" id="cart-icon">
+    <img src="assets/gambar/cart_icon.png" alt="Cart" width="70px">
     <?php if (!empty($_SESSION['cart'])): ?>
         <?php $cart_count = array_sum($_SESSION['cart']); ?>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -191,6 +242,7 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
         </span>
     <?php endif; ?>
 </a>
+
 
         </span>
                     <button onclick="tampil_isiDropdown()" class="dropbtn">
@@ -302,13 +354,15 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
                 © 2024 Copyright:
                 <a>Sumber Aneka Botol</a>
             </div>
-        </footer>
-    </div>
-    <a href="https://wa.me/6281802134040" class="wa-button">
+            <a href="https://wa.me/6281802134040" class="wa-button">
         <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
     </a>
     <a href="cart.php" class="cart-button">
         <img src="assets/gambar/cart_icon.png" alt="WhatsApp Logo" >
     </a>
+        </footer>
+    </div>
+
+
 </body>
 </html>
