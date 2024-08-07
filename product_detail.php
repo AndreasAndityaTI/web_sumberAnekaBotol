@@ -116,27 +116,41 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     max-width: 600px;
 }
 
-/* CSS khusus untuk mobile */
-@media (max-width: 768px) {
-    .product-info {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+/* Style for the floating Cart button */
+@media only screen and (max-width: 768px) {
 
-    .product-info img {
-        display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  width: 80%;
-        height: auto; /* Menjaga rasio aspek gambar */
-    }
+.cart-button {
+    position: fixed;
+    bottom: 20px; /* Adjusted to prevent any overlap with the white line */
+    left: 20px;
+    max-width: 768px;
 
-    .product-info .description {
-        max-width: 100%; /* Menyesuaikan lebar deskripsi dengan lebar layar */
-    }
+    /* z-index: 2147483647; */
+    width: 100px; /* Set a specific width for the button */
+    height: 100px; /* Set a specific height for the button */
+    background-color: white; /* WhatsApp green */
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Optional: add shadow for better visibility */
+    text-decoration: none; /* Ensure no underline on the button */
+    border-radius: 50%;
+
 }
+
+.cart-button:hover {
+    background-color: grey; /* Darker WhatsApp green on hover */
+}
+
+.cart-button img {
+    width: 70%; /* Make sure the image fits well inside the button */
+    height: auto; /* Maintain aspect ratio */
+
+    
+}
+
+}
+
 
 
     </style>
@@ -145,6 +159,8 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     <div class="container">
         <div class="title-section row align-items-center justify-content-between">
             <div class="col-8 col-md-4 d-flex align-items-center">
+
+            
                 <button class="btn btn-secondary d-md-none me-3 hamburger-menu" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="assets/gambar/dropdown.png" alt="dropdown" width="30px">
                 </button>
@@ -162,6 +178,21 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
             </div>
             <div class="col-md-4 d-none d-md-block text-end">
                 <div class="dropdown">
+                <span class="col-12 col-md-4 text-end">
+    <!-- Cart Icon -->
+<!-- Cart Icon -->
+<a href="cart.php" class="btn btn-light position-relative">
+    <img src="assets/gambar/cart_icon.png" alt="Cart" class="cart-icon cart-icon-red" width="100px">
+    <?php if (!empty($_SESSION['cart'])): ?>
+        <?php $cart_count = array_sum($_SESSION['cart']); ?>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <?php echo htmlspecialchars($cart_count, ENT_QUOTES, 'UTF-8'); ?>
+            <span class="visually-hidden">items in cart</span>
+        </span>
+    <?php endif; ?>
+</a>
+
+        </span>
                     <button onclick="tampil_isiDropdown()" class="dropbtn">
                         <img src="assets/gambar/dropdown.png" alt="dropdown" width="30px">
                         <a>Kategori</a>
@@ -240,19 +271,7 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
 
 
         <footer class="text-center text-lg-start bg-body-tertiary text-muted">
-            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-                <div class="me-5 d-none d-lg-block">
-                    <span>Get connected with us on social networks:</span>
-                </div>
-                <div>
-                    <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
-                    <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
-                    <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
-                    <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
-                    <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
-                    <a href="" class="me-4 text-reset"><i class="fab fa-github"></i></a>
-                </div>
-            </section>
+      
             <section class="">
                 <div class="container text-center text-md-start mt-5">
                     <div class="row mt-3">
@@ -287,6 +306,9 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     </div>
     <a href="https://wa.me/6281802134040" class="wa-button">
         <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
+    </a>
+    <a href="cart.php" class="cart-button">
+        <img src="assets/gambar/cart_icon.png" alt="WhatsApp Logo" >
     </a>
 </body>
 </html>
