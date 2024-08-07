@@ -64,6 +64,36 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
     filter: sepia(1) saturate(5) hue-rotate(-50deg);
 }
         
+.cart-button {
+    position: fixed;
+    bottom: 20px; /* Adjusted to prevent any overlap with the white line */
+    left: 20px;
+    max-width: 768px;
+
+    /* z-index: 2147483647; */
+    width: 80px; /* Set a specific width for the button */
+    height: 80px; /* Set a specific height for the button */
+    background-color: white; /* WhatsApp green */
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Optional: add shadow for better visibility */
+    text-decoration: none; /* Ensure no underline on the button */
+    border-radius: 50%;
+
+}
+
+.cart-button:hover {
+    background-color: grey; /* Darker WhatsApp green on hover */
+}
+
+.cart-button img {
+    width: 70%; /* Make sure the image fits well inside the button */
+    height: auto; /* Maintain aspect ratio */
+
+    
+}
+
 
 
 
@@ -95,16 +125,7 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                 <span class="col-12 col-md-4 text-end">
     <!-- Cart Icon -->
 <!-- Cart Icon -->
-<a href="cart.php" class="btn btn-light position-relative">
-    <img src="assets/gambar/cart_icon.png" alt="Cart" class="cart-icon cart-icon-red" width="100px">
-    <?php if (!empty($_SESSION['cart'])): ?>
-        <?php $cart_count = array_sum($_SESSION['cart']); ?>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            <?php echo htmlspecialchars($cart_count, ENT_QUOTES, 'UTF-8'); ?>
-            <span class="visually-hidden">items in cart</span>
-        </span>
-    <?php endif; ?>
-</a>
+
 
         </span>
           
@@ -241,7 +262,9 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                         <a href=" <?php echo htmlspecialchars($kontak['isi'], ENT_QUOTES, 'UTF-8'); ?>" class="text-reset">
                         <?php echo htmlspecialchars($kontak['info'], ENT_QUOTES, 'UTF-8'); ?>
                         </a>
-
+                        <a href="cart.php" class="cart-button">
+        <img src="assets/gambar/cart_icon.png" alt="cart icon" >
+    </a>
                         </p>
                         <?php endforeach; ?>
 

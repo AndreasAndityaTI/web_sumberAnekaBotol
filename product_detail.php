@@ -95,14 +95,11 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    margin-left: 5%;
+
 }
 
-/* CSS umum */
-.product-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
+
 
 .product-info img {
     margin-right: 20px;
@@ -121,6 +118,7 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     .product-info {
         flex-direction: column;
         align-items: flex-start;
+
         
     }
 
@@ -140,29 +138,9 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
   margin-right: auto;
 
     }
-    #cart-icon {
-    position: fixed;
-    bottom: 20px; /* Adjust to fit within screen */
-    right: 20px; /* Adjust to fit within screen */
-    width: 60px; /* Adjust width as needed */
-    height: 60px; /* Adjust height as needed */
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-    border-radius: 50%;
-    z-index: 1000; /* Ensure it's on top of other elements */
-    visibility: visible; /* Ensure visibility */
-}
-
-#cart-icon:hover {
-    background-color: gray; /* Darker color on hover */
 }
 
 /* Style for the floating Cart button */
-@media only screen {
 
 .cart-button {
     position: fixed;
@@ -194,15 +172,11 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
     
 }
 
-}
 
 
-}
-@media (min-width: 768px) {
-        .cart-button {
-            display: none;
-        }
-    }
+
+
+
 
     </style>
 </head>
@@ -232,16 +206,6 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
                 <span class="col-12 col-md-4 text-end">
     <!-- Cart Icon -->
 <!-- Cart Icon -->
-<a href="cart.php" id="cart-icon">
-    <img src="assets/gambar/cart_icon.png" alt="Cart" width="70px">
-    <?php if (!empty($_SESSION['cart'])): ?>
-        <?php $cart_count = array_sum($_SESSION['cart']); ?>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            <?php echo htmlspecialchars($cart_count, ENT_QUOTES, 'UTF-8'); ?>
-            <span class="visually-hidden">items in cart</span>
-        </span>
-    <?php endif; ?>
-</a>
 
 
         </span>
@@ -292,10 +256,23 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
         alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" 
         class="img-fluid">
     <div class="description">
-        <h1><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></h1>
+        <h1><?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?> 
+       (<?php echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); ?>)
+
+    </h1>
         <br>
-        <p><strong>Satuan:</strong> <?php echo htmlspecialchars($product['satuan_barang'], ENT_QUOTES, 'UTF-8'); ?></p>
-        <p><strong>Deskripsi:</strong> <?php echo htmlspecialchars($product['deskripsi'], ENT_QUOTES, 'UTF-8'); ?></p>
+
+        <p><strong>Deskripsi:</strong>     </p>
+
+        <p>
+        <?php echo htmlspecialchars($product['deskripsi'], ENT_QUOTES, 'UTF-8'); ?>
+
+wgainveiinevrvffffoooooooooooooooooo
+wgainveiinevrvffffoooooooooooooooooo
+wgainveiinevrvffffoooooooooooooooooo
+
+</p>
+
         <p><strong>Ukuran Tersedia dan Harga:</strong></p>
         <?php
         function formatRupiah($angka) {
@@ -358,7 +335,7 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
         <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
     </a>
     <a href="cart.php" class="cart-button">
-        <img src="assets/gambar/cart_icon.png" alt="WhatsApp Logo" >
+        <img src="assets/gambar/cart_icon.png" alt="cart icon" >
     </a>
         </footer>
     </div>
