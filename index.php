@@ -240,31 +240,18 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
             <section class="">
                 <div class="container text-center text-md-start mt-5">
                     <div class="row mt-3">
-
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        
-                
-                        <h6 class="text-uppercase fw-bold mb-4">Alamat</h6>
-                        <?php foreach ($alamats as $alamat):?>
-                        <p class="fas fa-home me-3">
-                        <?php echo htmlspecialchars($alamat['isi'], ENT_QUOTES, 'UTF-8'); ?>
-                        </p>
-                        <?php endforeach; ?>
-
-                    </div>
-
+          
                     <div class="col-md-2 col-lg-4 col-xl-3 mx-auto mb-4">
                         
-                    <h6 class="text-uppercase fw-bold mb-4">Lokasi</h6>
-
-              
-                    <p>
-                            <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.9830046596!2d110.3862161!3d-7.791623599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59d6ec504463%3A0x26cd056c8a731587!2sSumber%20Aneka%20Botol!5e0!3m2!1sen!2sid!4v1723116792768!5m2!1sen!2sid"                         
-                            width="250" height="180" style="border-radius: 10%;" allowfullscreen="" loading="lazy"></iframe></p>
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11065.045963444532!2d110.3881871716741!3d-7.793040860536507!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a57d8af3c48a5%3A0x588cadb8313956e1!2sOmah%20Pelem%20Yogya%20Homestay!5e0!3m2!1sen!2sid!4v1723136544799!5m2!1sen!2sid" 
-                                width="250" height="180" style="border-radius: 10%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                    </div>
-
+                        <h6 class="text-uppercase fw-bold mb-4">Lokasi</h6>
+    
+                  
+                        <p>
+                        <iframe src="https://www.google.com/maps/d/embed?mid=1TM-8bCNNY5SWUSx9N465px9VZGzWvP8&ehbc=2E312F" width="400" height="300"></iframe>
+                            </p>
+            
+            
+                            </div>
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         
                 
@@ -274,13 +261,20 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                         <a href=" <?php echo htmlspecialchars($kontak['isi'], ENT_QUOTES, 'UTF-8'); ?>" class="text-reset">
                         <?php echo htmlspecialchars($kontak['info'], ENT_QUOTES, 'UTF-8'); ?>
                         </a>
+                        <?php endforeach; ?>
+
+                        </div>
+
+           
+
+          
+
+     
                         <a href="cart.php" class="cart-button">
         <img src="assets/gambar/cart_icon.png" alt="cart icon" >
     </a>
                         </p>
-                        <?php endforeach; ?>
 
-                    </div>
    
 
                     </div>
@@ -291,6 +285,7 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
                 <a  >Sumber Aneka Botol</a>
             </div>
         </footer>
+        
     </div>
 </body>
 </html>
