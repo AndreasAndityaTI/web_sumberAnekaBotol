@@ -192,7 +192,7 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
                 <img src="assets/gambar/logo_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="50px">
                 <img src="assets/gambar/title_anekaBotol.jpg" alt="Logo Sumber Aneka Botol" width="185px" class="ms-3">
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#about">About</a></li>
+                    <li><a class="dropdown-item" href="pdf_katalog.php">PDF Katalog</a></li>
                     <li><a class="dropdown-item" href="#base">Base</a></li>
                     <li><a class="dropdown-item" href="#blog">Blog</a></li>
                     <li><a class="dropdown-item" href="#contact">Contact</a></li>
@@ -214,7 +214,7 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
                         <a>Kategori</a>
                     </button>
                     <div id="myDropdown" class="dropdown-content">
-                        <a href="#about">About</a>
+                    <li><a class="dropdown-item" href="pdf_katalog.php">PDF Katalog</a></li>
                         <a href="#base">Base</a>
                         <a href="#blog">Blog</a>
                         <a href="#contact">Contact</a>
@@ -267,9 +267,7 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
         <p>
         <?php echo htmlspecialchars($product['deskripsi'], ENT_QUOTES, 'UTF-8'); ?>
 
-wgainveiinevrvffffoooooooooooooooooo
-wgainveiinevrvffffoooooooooooooooooo
-wgainveiinevrvffffoooooooooooooooooo
+
 
 </p>
 
@@ -311,6 +309,17 @@ wgainveiinevrvffffoooooooooooooooooo
                                     <?php echo htmlspecialchars($alamat['isi'], ENT_QUOTES, 'UTF-8'); ?>
                                 </p>
                             <?php endforeach; ?>
+                        </div>
+
+                    <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+                        
+                        <h6 class="text-uppercase fw-bold mb-4">Lokasi</h6>
+    
+                        <p>
+                            <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.9830046596!2d110.3862161!3d-7.791623599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59d6ec504463%3A0x26cd056c8a731587!2sSumber%20Aneka%20Botol!5e0!3m2!1sen!2sid!4v1723116792768!5m2!1sen!2sid"                         
+                            width="200" height="180" style="border-radius: 10%;" allowfullscreen="" loading="lazy"></iframe></p>
+    
                         </div>
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                             <h6 class="text-uppercase fw-bold mb-4">Kontak</h6>
