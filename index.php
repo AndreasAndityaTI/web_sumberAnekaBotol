@@ -253,7 +253,6 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
 
                     </div>
 
-
                     <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
                         
                     <h6 class="text-uppercase fw-bold mb-4">Lokasi</h6>
