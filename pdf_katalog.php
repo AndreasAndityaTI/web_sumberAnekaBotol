@@ -1,4 +1,8 @@
 <?php
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require('fpdf/fpdf.php'); // Adjust the path as necessary
 
 // Database connection
@@ -15,12 +19,13 @@ $imagePath = 'assets/gambar/title_anekaBotol.jpg';
 
 
 // Get image dimensions
-list($width, $height) = getimagesize($imagePath);
+// Calculate the X position to center the image
+$imageWidth = 100; // width of the image in mm
+$centerX = ($pdf->GetPageWidth() - $imageWidth) / 2;
 
-// $pdf->Image($imagePath, 10, 10, 150, 20,);
-// $pdf->Ln(100); 
+// Set the image at the calculated position
+$pdf->Cell(0, 10, $pdf->Image($imagePath, $centerX, $pdf->GetY(), $imageWidth), 0, 1, 'C');
 
-$pdf->Cell(0, 10, 'Product Catalog', 0, 1, 'C');
 $pdf->Ln(10); // Line break
 
 // Fetch product details
@@ -32,6 +37,10 @@ $pdf->SetFont('Arial', '', 12);
 
 foreach ($products as $product) {
     // Product Name
+    // $imageProduk = 'http://localhost/sumberAnekaBotol/get_image.php?id=' . urlencode($product['id']);
+
+    // $pdf->Cell(40, 40, $pdf->Image($imageProduk, $pdf->GetX(), $pdf->GetY(), 33.78), 0, 0, 'L', false);
+    // $pdf->Ln();
 
     $pdf->Cell(0, 10, 'Product Name: ' . $product['nama_barang'] . " (".$product['satuan_barang'].")", 0, 1);
 
