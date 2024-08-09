@@ -185,7 +185,9 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
         <div class="title-section row align-items-center justify-content-between">
             <div class="col-8 col-md-4 d-flex align-items-center">
 
-            
+            <a href="https://wa.me/6281703177070" class="wa-button">
+            <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
+        </a>
                 <button class="btn btn-secondary d-md-none me-3 hamburger-menu" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="assets/gambar/dropdown.png" alt="dropdown" width="30px">
                 </button>
@@ -226,7 +228,7 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
             </div>
             <div class="col-12 col-md-4 mt-3 mt-md-0 text-end">
                 <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+                    <input type="search" class="form-control rounded" placeholder="Cari Produk.." aria-label="Search" aria-describedby="search-addon">
                     <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -297,56 +299,58 @@ $ukuran_dan_harga = json_decode($result['ukuran_dan_harga'], true);
 
 
 
-        <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+         <!-- Footer -->
+         <footer class="text-center text-lg-start bg-body-tertiary text-muted">
       
-            <section class="">
-                <div class="container text-center text-md-start mt-5">
-                    <div class="row mt-3">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">Alamat</h6>
-                            <?php foreach ($alamats as $alamat): ?>
-                                <p class="fas fa-home me-3">
-                                    <?php echo htmlspecialchars($alamat['isi'], ENT_QUOTES, 'UTF-8'); ?>
-                                </p>
-                            <?php endforeach; ?>
-                        </div>
+      <section class="">
+          <div class="container text-center text-md-start mt-5">
+              <div class="row mt-3">
+    
+              <div class="col-md-2 col-lg-4 col-xl-3 mx-auto mb-4">
+                  
+                  <h6 class="text-uppercase fw-bold mb-4">Lokasi</h6>
 
-                    <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
-                        
-                        <h6 class="text-uppercase fw-bold mb-4">Lokasi</h6>
+            
+                  <p>
+                  <iframe src="https://www.google.com/maps/d/embed?mid=1TM-8bCNNY5SWUSx9N465px9VZGzWvP8&ehbc=2E312F" width="300" height="250"></iframe>
+                    </p>
+      
+      
+                      </div>
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                  
+          
+                  <h6 class="text-uppercase fw-bold mb-4">Kontak</h6>
+                  <?php foreach ($kontaks as $kontak):?>
+                  <p class="fas fa-home me-3" >
+                  <a href=" <?php echo htmlspecialchars($kontak['isi'], ENT_QUOTES, 'UTF-8'); ?>" class="text-reset">
+                  <?php echo htmlspecialchars($kontak['info'], ENT_QUOTES, 'UTF-8'); ?>
+                  </a>
+                  <?php endforeach; ?>
+
+                  </div>
+
+     
+
     
-                        <p>
-                            <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.9830046596!2d110.3862161!3d-7.791623599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59d6ec504463%3A0x26cd056c8a731587!2sSumber%20Aneka%20Botol!5e0!3m2!1sen!2sid!4v1723116792768!5m2!1sen!2sid"                         
-                            width="200" height="180" style="border-radius: 10%;" allowfullscreen="" loading="lazy"></iframe></p>
-    
-                        </div>
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">Kontak</h6>
-                            <?php foreach ($kontaks as $kontak): ?>
-                                <p class="fas fa-home me-3">
-                                    <center>
-                                        <a href="<?php echo htmlspecialchars($kontak['isi'], ENT_QUOTES, 'UTF-8'); ?>" class="text-reset">
-                                            <?php echo htmlspecialchars($kontak['info'], ENT_QUOTES, 'UTF-8'); ?>
-                                        </a>
-                                    </center>
-                                </p>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-                © 2024 Copyright:
-                <a>Sumber Aneka Botol</a>
-            </div>
-            <a href="https://wa.me/6281802134040" class="wa-button">
-        <img src="assets/gambar/WhatsApp_icon.png" alt="WhatsApp Logo">
-    </a>
-    <a href="cart.php" class="cart-button">
-        <img src="assets/gambar/cart_icon.png" alt="cart icon" >
-    </a>
-        </footer>
+
+     
+                  <a href="cart.php" class="cart-button">
+  <img src="assets/gambar/cart_icon.png" alt="cart icon" >
+</a>
+                  </p>
+
+
+
+              </div>
+          </div>
+      </section>
+      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2024 Copyright:
+          <a  >Sumber Aneka Botol</a>
+      </div>
+  </footer>
+
     </div>
 
 

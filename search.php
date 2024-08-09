@@ -1,9 +1,18 @@
 <?php
 include 'config.php';
 
-// Fetch products
-$query = $config->query("SELECT id,  satuan_barang, nama_barang FROM barang");
-$products = $query->fetchAll(PDO::FETCH_ASSOC);
+$searchTerm = '';
+$results = [];
+
+if (isset($_GET['query'])) {
+    $searchTerm = htmlspecialchars($_GET['query'], ENT_QUOTES, 'UTF-8');
+    
+    // Prepare the SQL query to search for products
+    $stmt = $config->prepare("SELECT id, satuan_barang, nama_barang FROM barang WHERE nama_barang LIKE :searchTerm");
+    $stmt->execute(['searchTerm' => '%' . $searchTerm . '%']);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 // Fetch alamat details
 
@@ -201,7 +210,7 @@ $kontaks = $query_kontak->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="container-fluid mt-3">
         <div class="product-grid row">
-    <?php foreach ($products as $product): ?>
+    <?php foreach ($results as $product): ?>
         <div class="product-card col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <center>
 `            <img src="get_image.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['nama_barang'], ENT_QUOTES, 'UTF-8'); ?>" >
